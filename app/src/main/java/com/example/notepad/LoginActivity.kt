@@ -54,6 +54,16 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+    override fun onResume() {
+        if(auth.currentUser!=null){
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+        super.onResume()
+    }
+
     private fun loginUser(email: String, password: String){
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task->
             if (task.isSuccessful){
